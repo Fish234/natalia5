@@ -1,0 +1,90 @@
+// Place all the styles related to the StaticPages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+/*color palette*/
+
+
+$font-color: #002228;
+$dark-grey: #88a2aa;
+$light-border: #d5eaef;
+$primary-background: #f9fdff;
+$accent-border: #ff4a1c;
+
+body {
+  margin: 0;
+  padding: 0;
+  background: $primary-background;
+}
+
+.main-content {
+  padding: 20px 50px;
+  margin: 0 auto;
+  width: 30em;
+}
+
+.alert {
+  color: white;
+  line-height: 3em;
+  text-align: center;
+  background-color: $accent-border;
+
+}
+
+.notice {
+  color: #dark-grey;
+  line-height: 3em;
+  text-align: center;
+  background-color: $light-border;
+}
+
+nav {
+  ul {
+    list-style: none;
+    background-color: $dark-grey;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    font-size: 1.2em;
+    line-height: 40px;
+    height: 40px;
+    border-bottom: 1px solid $light-border;
+  }
+
+  a {
+    text-decoration: none;
+    color: white;
+    display: block;
+    transition: .3s background-color;
+
+  }
+
+  a:hover {
+    background-color: $accent-border;
+  }
+
+  a.active {
+    color: $dark-grey;
+    background-color: $light-border;
+    cursor: default;
+  }
+}
+
+@media screen and (min-width: 600px) {
+  nav{
+
+    li {
+      width: 120px;
+      border-bottom: none;
+      height: 50px;
+      line-height: 50px;
+      font-size: 1.4em;
+
+      display:  inline-block;
+      margin-right: -4px;
+    }
+
+  }
+}

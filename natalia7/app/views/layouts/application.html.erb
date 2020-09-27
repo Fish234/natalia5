@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SignIn</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body>
+ <p class="notice"><%= notice %></p>
+ <p class="alert"><%= alert %></p>
+ <nav>
+  <ul>
+    <li><%= link_to "home", root_path, :class => "active" %></li>
+    <li><%= link_to "members", members_only_path %></li>
+    <li><%= link_to "admin", admins_only_path %></li>
+    <li><%= link_to "Sign Out", users.sign_out_path, method: :delete %></li>
+    <li><%= link_to "Sign In", users.sign_in_path %></li>
+  </ul>
+</nav>
+<div class="main-content">
+  <div class="login-info">
+    <p> you are signed in as current_user.email </p>
+    <p> with role current_user.role </p>
+  </div>
+  <%= yield %>
+</div>
+</body>
+</html>
