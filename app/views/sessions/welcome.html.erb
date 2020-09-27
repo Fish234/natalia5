@@ -1,4 +1,4 @@
-<h1>Welcome</h1>
+<h1>Bienvenido</h1>
 <% if logged_in? %>
     <h1>Bienvenido nuevamente, <%= current_user.username %></h1>
     <%= button_to "Logout", '/logout', method: :get%>
@@ -6,3 +6,5 @@
     <%= button_to "Login", '/login', method: :get%>
     <%= button_to "Sign Up", '/users/new', method: :get%>
 <%end%>
+
+<% @total_rows %>

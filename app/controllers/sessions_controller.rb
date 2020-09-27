@@ -25,6 +25,7 @@ class SessionsController < ApplicationController
    end 
 
    def welcome
+      @total_rows = Tweet.count
    end
 
    def page_requires_login
