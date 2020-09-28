@@ -25,9 +25,20 @@ class SessionsController < ApplicationController
    end 
 
    def welcome
-      @total_rows = Tweet.count
-   end
+      @quantity = params[:add]
+      @addition = 50
 
-   def page_requires_login
+      if(@quantity == nil && @quantity == 0) 
+         @quantity = @addition
+      else
+         @quantity = @quantity.to_i + @addition
+      end
+
+
+      @tweets = Tweet.select(Arel.star).joins(
+         Tweet.arel_table.join(User.arel_table).on(
+         User.arel_table[:username].eq(Tweet.arel_table[:username])
+         ).join_sources
+      ).order(created_at: :desc).limit(@quantity.to_i)
    end
 end

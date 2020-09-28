@@ -2,9 +2,25 @@
 <% if logged_in? %>
     <h1>Bienvenido nuevamente, <%= current_user.username %></h1>
     <%= button_to "Logout", '/logout', method: :get%>
+    <%= button_to "Nuevo Tweet", '/create', method: :get%>
 <% else %>
     <%= button_to "Login", '/login', method: :get%>
     <%= button_to "Sign Up", '/users/new', method: :get%>
 <%end%>
 
-<% @total_rows %>
+<div class="row">
+<% @tweets.each do |tweet| %>
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <img src="<%= tweet.profile_img %>">
+        </div>
+        <div class="col-md-9">
+            <h2><%= tweet.username %></h2>
+            <%= tweet.content %>
+            <br>
+            likes <%= tweet.likes %> | retweets <%= tweet.retweets %>
+        </div>
+    </div>
+<% end %>
+</div>
+<%= link_to(raw("mostrar más tweets"),{:add => @quantity.to_i},{ :class => 'highlight'})  %>
