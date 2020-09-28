@@ -1,24 +1,9 @@
-# README
+The page you were looking for doesn't exist.
+You may have mistyped the address or the page may have moved.
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+If you are the application owner check the logs for more information.
 
-Things you may want to cover:
 
-* Ruby version
+https://aqueous-dusk-07458.herokuapp.com
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+(arreglando error)
