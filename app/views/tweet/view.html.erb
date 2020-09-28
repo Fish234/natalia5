@@ -1,0 +1,45 @@
+<div class="row">
+<%
+likes = 0
+likes_show = true
+    if (@tweet.likes != nil)
+        likes = @tweet.likes.split(';').count
+
+        if (@tweet.likes.split(';').include? current_user.username) 
+            likes_show = false
+        end
+    end
+    %>
+    <div class="col-md-12">
+        <div class="col-md-3">
+            <img src="<%= @tweet.profile_img %>">
+        </div>
+        <div class="col-md-9">
+            <h2><%= @tweet.username %></h2>
+            <%= @tweet.content %>
+            <br>
+            likes <%= likes %> 
+            <% if (likes_show) %>
+            <%= link_to "Like", {:controller => "/tweet", :action => "like", :id => @tweet.id} %>
+            <% else %>
+            ya lakio
+            <% end %>
+            | retweets <%= @tweet.retweets %>
+        </div>
+    </div>
+</div>
+
+<% if(@tweet.likes != nil) %>
+    <div class="row">
+        <% @users.each do |user| %>
+            <div class="col-md-12">
+                <div class="col-md-3">
+                    <img src="<%= user.profile_img %>">
+                </div>
+                <div class="col-md-9">
+                    <%= user.username %>
+                </div>
+            </div>
+        <% end %>
+    </div>
+<% end %>

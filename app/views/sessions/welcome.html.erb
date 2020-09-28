@@ -1,15 +1,33 @@
-<h1>Bienvenido</h1>
 <% if logged_in? %>
-    <h1>Bienvenido nuevamente, <%= current_user.username %></h1>
+    <h1>Bienvenido, <%= current_user.username %></h1>
     <%= button_to "Logout", '/logout', method: :get%>
-    <%= button_to "Nuevo Tweet", '/create', method: :get%>
+    
+    <h1>Nuevo Tweet</h1>
+   <%= form_tag '/create' do %>
+    <p> contenido del tweet</p>
+    <%= text_field_tag :content, nil, :required => true  %>
+    <%= submit_tag "Crear"%>
+    <%end%>
+
 <% else %>
     <%= button_to "Login", '/login', method: :get%>
     <%= button_to "Sign Up", '/users/new', method: :get%>
 <%end%>
 
 <div class="row">
-<% @tweets.each do |tweet| %>
+<% @tweets.each do |tweet| 
+likes = 0
+likes_show = true
+
+    if (tweet.likes != nil)
+        likes = tweet.likes.split(';').count
+
+        if (tweet.likes.split(';').include? current_user.username) 
+            likes_show = false
+        end
+    end
+    %>
+    
     <div class="col-md-12">
         <div class="col-md-3">
             <img src="<%= tweet.profile_img %>">
@@ -18,9 +36,23 @@
             <h2><%= tweet.username %></h2>
             <%= tweet.content %>
             <br>
-            likes <%= tweet.likes %> | retweets <%= tweet.retweets %>
+            likes <%= likes %> 
+            <% if (likes_show) %>
+            | <%= link_to "Like", {:controller => "/tweet", :action => "like", :id => tweet.id} %>
+            <% else %>
+            | <%= link_to "Unlike", {:controller => "/tweet", :action => "unlike", :id => tweet.id} %>
+            <% end %>
+            <% if (tweet.retweets != nil) %>
+                | <%= link_to "Original Tweet", {:controller => "/tweet", :action => "view", :id => tweet.retweets} %>
+            <% end %>
+
+            | <%= link_to time_ago_in_words(tweet.created_at), {:controller => "/tweet", :action => "view", :id => tweet.id} %>
+            | <%= link_to "retweet", {:controller => "/tweet", :action => "retweet", :id => tweet.id} %>
         </div>
     </div>
 <% end %>
 </div>
-<%= link_to(raw("mostrar más tweets"),{:add => @quantity.to_i},{ :class => 'highlight'})  %>
+
+<% if logged_in? %>
+    <%= link_to(raw("mostrar más tweets"),{:add => @quantity.to_i},{ :class => 'highlight'})  %>
+<% end %>

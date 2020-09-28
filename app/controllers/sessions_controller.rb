@@ -35,7 +35,14 @@ class SessionsController < ApplicationController
       end
 
 
-      @tweets = Tweet.select(Arel.star).joins(
+      @tweets = Tweet.select(
+         :id, 
+         :likes, 
+         :content, 
+         :retweets, 
+         :profile_img,
+         :username,
+         :created_at).joins(
          Tweet.arel_table.join(User.arel_table).on(
          User.arel_table[:username].eq(Tweet.arel_table[:username])
          ).join_sources
