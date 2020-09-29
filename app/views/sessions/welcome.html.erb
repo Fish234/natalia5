@@ -18,13 +18,15 @@
 <% @tweets.each do |tweet| 
 likes = 0
 likes_show = true
-
+    
+    if logged_in? 
     if (tweet.likes != nil)
         likes = tweet.likes.split(';').count
 
         if (tweet.likes.split(';').include? current_user.username) 
             likes_show = false
         end
+    end
     end
     %>
     
@@ -36,6 +38,7 @@ likes_show = true
             <h2><%= tweet.username %></h2>
             <%= tweet.content %>
             <br>
+            <% if logged_in? %>
             likes <%= likes %> 
             <% if (likes_show) %>
             | <%= link_to "Like", {:controller => "/tweet", :action => "like", :id => tweet.id} %>
@@ -46,8 +49,10 @@ likes_show = true
                 | <%= link_to "Original Tweet", {:controller => "/tweet", :action => "view", :id => tweet.retweets} %>
             <% end %>
 
-            | <%= link_to time_ago_in_words(tweet.created_at), {:controller => "/tweet", :action => "view", :id => tweet.id} %>
+            
             | <%= link_to "retweet", {:controller => "/tweet", :action => "retweet", :id => tweet.id} %>
+        <% end %>
+        |<%= link_to time_ago_in_words(tweet.created_at), {:controller => "/tweet", :action => "view", :id => tweet.id} %>
         </div>
     </div>
 <% end %>
