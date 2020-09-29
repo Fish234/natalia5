@@ -45,7 +45,7 @@ class TweetController < ApplicationController
 
     if(@tweet.likes != nil)
       @tweet.likes = @tweet.likes.sub(current_user.username, "") 
-      @tweet.likes = @tweet.likes.sub(";;", current_user.username) 
+      @tweet.likes = @tweet.likes.sub(";;", ";") 
     end
 
     @tweet.update(:likes => @tweet.likes)
