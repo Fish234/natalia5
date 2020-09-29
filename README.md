@@ -4,6 +4,6 @@ You may have mistyped the address or the page may have moved.
 If you are the application owner check the logs for more information.
 
 
-https://aqueous-dusk-07458.herokuapp.com
 
-(arreglando error)
+https://aqueous-dusk-07458.herokuapp.com/welcome
+
